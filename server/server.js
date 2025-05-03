@@ -31,7 +31,7 @@ function userDisconnect(socket){
     socket.on("disconnect",()=>{
         map.delete(socket.id);
         activeUsers()  //brodcast the active user list
-        console.log('user disconnected');
+        // console.log('user disconnected');
     })
 }
 
@@ -40,20 +40,20 @@ function activeUsers(){  //brodcast the active user list
     io.emit("activeUsers",activeUserData)
 }
 io.on("connection",(socket)=>{
-    console.log('user connected');
+    // console.log('user connected');
     userConnecting(socket)  //function added the user to the pool
     userDisconnect(socket); //dunction which del the user the form the pool 
     socket.on("chatMessage",(msg)=>{
-        console.log(msg)
+        // console.log(msg)
         io.to(msg.id).emit('chatMessage', msg);
     });
     
 })
 
 io.on("chatMessage",(msg)=>{
-    console.log(msg)
+    // console.log(msg)
 })
 
 http.listen(4000, ()=>{
-    console.log('listening on *: http://localhost:4000/');
+    // console.log('listening on *: http://localhost:4000/');
   });
